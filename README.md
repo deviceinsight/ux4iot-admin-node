@@ -1,4 +1,4 @@
-# ux4iot Admin Client
+# ux4iot-admin-node
 
 ![Test suite](https://github.com/jankapunkt/npm-package-template/workflows/Test%20suite/badge.svg)
 [![Build Status](https://travis-ci.org/jankapunkt/npm-package-template.svg?branch=master)](https://travis-ci.org/jankapunkt/npm-package-template)
@@ -6,72 +6,33 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![GitHub](https://img.shields.io/github/license/jankapunkt/npm-package-template)
 
-Minimal tested and fully functional NPM package template project for ES6+ Javascript.
+ux4iot-admin-node provides a minimalistic node-sdk client for ux4iot. Use this package to easily access grant requests to the ux4iot service.
 
-## About this package
+## Installation
 
-This template is intended to allow you to **start developing immediatly** with a working set
-of tools and scripts that play well together.
-
-It is little opinionated to the point, that only the most basic tools are integrated.
-If you want a different flavour you can fork this project and easily replace the tools or add new ones.
-
-## Which tools are used?
-
-## Getting started
-
-In your backend code, initialize the admin client:
-
-```javascript
-const ux4iotAdmin = initializeAdmin({
-	connectionString: 'HostName=yourux4iotinstance.com;Key=supersecret',
-});
+```
+npm install ux4iot-admin-node
 ```
 
-In order to generate subscription tokens:
+## Usage
 
-```javascript
-const subscriptionToken = ux4iotAdmin.createSubscriptionToken({
-	deviceIds: ['somedevice', 'anotherdevice'],
-	telemetry: ['temperature', 'pressure'],
-	accessToAllTelemetryValues: false,
-});
+```js
+import Ux4iotAdmin from 'ux4iot-admin-node';
+
+const sdk = new Ux4iotAdmin({ connectionString: 'YOUR_CONNECTION_STRING' });
+
+const grantRequest = {
+    deviceId: 'mydevice',
+    sessionId: 'valid-session-id',
+    grantType: 'subscribeToTelemetry',
+    telemetryKey: 'mytelemetry'
+}
+
+await sdk.grant(grantRequest);
 ```
 
-## Code Quality
+## Check out the [Documentation](https://docs.ux4iot.com/implementing-your-custom-security-backend/introduction) for
 
-We use `standard` as opinionated but zero-config linter.
-You can run lint in two modes:
-
-##### lint
-
-```bash
-$ npm run lint
-```
-
-##### lint with auto fixing
-
-```bash
-$ npm run lint:fix
-```
-
-## Run the tests
-
-We use mocha and chai with a mostly (but not strict) behavioural style for testing.
-You can run the tests in three different contexts:
-
-##### Single run
-
-```bash
-$ npm run test
-```
-
-##### Watch mode
-
-```bash
-$ npm run test:watch
-```
-
-## License
-
-MIT, see [license file](LICENSE)
+- API documentation on grant requests with ux4iot
+- Why you would need to use this library when using ux4iot
+- How to write a security backend ux4iot
