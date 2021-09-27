@@ -1,0 +1,24 @@
+# Common
+node_modules/
+lib/
+testapp/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+.env.test
+
+# IDEs
+.idea
+.vscode
+.atom
+
+# VIM
+*.swp
