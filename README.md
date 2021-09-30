@@ -31,8 +31,10 @@ const grantRequest = {
 await sdk.grant(grantRequest);
 ```
 
-## Check out the [Documentation](https://docs.ux4iot.com/implementing-your-custom-security-backend/introduction) for
+## Documentation
+
+Check out the [Documentation](https://docs.ux4iot.com/implementing-your-custom-security-backend/introduction) for
 
 - API documentation on grant requests with ux4iot
 - Why you would need to use this library when using ux4iot
-- How to write a security backend ux4iot
+- How to write a security backend for ux4iot
