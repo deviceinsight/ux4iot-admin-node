@@ -1,12 +1,13 @@
 # ux4iot-admin-node
 
-![Test suite](https://github.com/jankapunkt/npm-package-template/workflows/Test%20suite/badge.svg)
-[![Build Status](https://travis-ci.org/jankapunkt/npm-package-template.svg?branch=master)](https://travis-ci.org/jankapunkt/npm-package-template)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-![GitHub](https://img.shields.io/github/license/jankapunkt/npm-package-template)
+ux4iot-admin-node provides a Node.js admin client for ux4iot. Use this library to easily access grant 
+requests to the ux4iot service.
 
-ux4iot-admin-node provides a minimalistic node-sdk client for ux4iot. Use this package to easily access grant requests to the ux4iot service.
+## Prerequisites
+
+In order to use this library you need to have an ux4iot instance deployed in your Azure subscription. [Here](https://docs.ux4iot.com/quickstart) 
+is a link to a quickstart that explains how to deploy one. [Here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/deviceinsightgmbh-4961725.ux4iot)
+is the link to the Azure Marketplace offering.
 
 ## Installation
 
