@@ -3,7 +3,7 @@ import { Twin } from 'azure-iothub';
 export type DeviceId = string;
 
 // Requests
-type GrantRequestBase<T> = {
+export type GrantRequestBase<T> = {
 	deviceId: string;
 	sessionId: string;
 } & T;

@@ -13,10 +13,7 @@
 		"lint:fix": "eslint --ignore-path='./.gitignore' '*/**/*.ts' --quiet --fix",
 		"lint": "eslint --ignore-path='./.gitignore' '*/**/*.ts'",
 		"prettier": "prettier --ignore-path=./.gitignore --write '*/**/*.ts'",
-		"test": "jest --passWithNoTests",
-		"build-testapp": "rm -rf testapp && tsc ",
-		"start-testapp": "node ./testapp/test.js",
-		"run-testapp": "npm run build-testapp && npm run start-testapp"
+		"test": "jest --passWithNoTests"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
