@@ -29,6 +29,21 @@ export default class Ux4iotAdmin {
 		return response.data;
 	}
 
+	public async getSessionId(): Promise<{ sessionId: string }> {
+		const response = await this.axiosInstance.post('/session');
+
+		return response.data;
+	}
+
+	public static async getSessionIdStatic(
+		endpoint: string
+	): Promise<{ sessionId: string }> {
+		const url = new URL('/session', endpoint).href;
+		const response = await axios.post(url);
+
+		return response.data;
+	}
+
 	public async grant(grantRequest: GrantRequest): Promise<void> {
 		return await this.axiosInstance.put('/grants', grantRequest);
 	}
