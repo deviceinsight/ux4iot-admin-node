@@ -1,6 +1,6 @@
 {
 	"name": "ux4iot-admin-node",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"description": "The Admin SDK for ux4iot",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
