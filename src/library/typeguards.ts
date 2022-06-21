@@ -4,17 +4,15 @@ import {
 	ConnectionStateGrantRequest,
 	DesiredPropertyGrantRequest,
 	DirectMethodGrantRequest,
-	RawD2CMessageGrantRequest,
-	GrantRequestBase,
+	D2CMessageGrantRequest,
+	GrantRequest,
 } from './ux4iot-shared';
 
-export const isGrantRequest = (
-	request: unknown
-): request is GrantRequestBase<any> => {
+export const isGrantRequest = (request: unknown): request is GrantRequest => {
 	return (
 		!!request &&
-		typeof (request as GrantRequestBase<any>).deviceId === 'string' &&
-		typeof (request as GrantRequestBase<any>).sessionId === 'string'
+		typeof (request as GrantRequest).deviceId === 'string' &&
+		typeof (request as GrantRequest).sessionId === 'string'
 	);
 };
 
@@ -24,8 +22,8 @@ export const isTelemetryGrantRequest = (
 	return (
 		!!request &&
 		isGrantRequest(request) &&
-		(request as GrantRequestBase<any>).grantType === 'subscribeToTelemetry' &&
-		typeof (request as GrantRequestBase<any>).telemetryKey === 'string'
+		(request as TelemetryGrantRequest).type === 'telemetry' &&
+		typeof (request as TelemetryGrantRequest).telemetryKey === 'string'
 	);
 };
 export const isDeviceTwinGrantRequest = (
@@ -34,7 +32,7 @@ export const isDeviceTwinGrantRequest = (
 	return (
 		!!request &&
 		isGrantRequest(request) &&
-		(request as GrantRequestBase<any>).grantType === 'subscribeToDeviceTwin'
+		(request as GrantRequest).type === 'deviceTwin'
 	);
 };
 export const isConnectionStateGrantRequest = (
@@ -43,8 +41,7 @@ export const isConnectionStateGrantRequest = (
 	return (
 		!!request &&
 		isGrantRequest(request) &&
-		(request as GrantRequestBase<any>).grantType ===
-			'subscribeToConnectionState'
+		(request as GrantRequest).type === 'connectionState'
 	);
 };
 export const isDesiredPropertyGrantRequest = (
@@ -53,7 +50,7 @@ export const isDesiredPropertyGrantRequest = (
 	return (
 		!!request &&
 		isGrantRequest(request) &&
-		(request as GrantRequestBase<any>).grantType === 'modifyDesiredProperties'
+		(request as GrantRequest).type === 'desiredProperties'
 	);
 };
 export const isDirectMethodGrantRequest = (
@@ -62,16 +59,16 @@ export const isDirectMethodGrantRequest = (
 	return (
 		!!request &&
 		isGrantRequest(request) &&
-		(request as GrantRequestBase<any>).grantType === 'invokeDirectMethod' &&
-		typeof (request as GrantRequestBase<any>).directMethodName === 'string'
+		(request as GrantRequest).type === 'directMethod' &&
+		typeof (request as DirectMethodGrantRequest).directMethodName === 'string'
 	);
 };
-export const isRawD2CMessageGrantRequest = (
+export const isD2CMessageGrantRequest = (
 	request: unknown
-): request is RawD2CMessageGrantRequest => {
+): request is D2CMessageGrantRequest => {
 	return (
 		!!request &&
 		isGrantRequest(request) &&
-		(request as GrantRequestBase<any>).grantType === 'subscribeToD2CMessages'
+		(request as GrantRequest).type === 'd2cMessages'
 	);
 };

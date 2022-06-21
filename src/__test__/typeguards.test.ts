@@ -4,7 +4,7 @@ import {
 	isDeviceTwinGrantRequest,
 	isDirectMethodGrantRequest,
 	isGrantRequest,
-	isRawD2CMessageGrantRequest,
+	isD2CMessageGrantRequest,
 	isTelemetryGrantRequest,
 } from '../library/typeguards';
 
@@ -85,19 +85,15 @@ describe('DirectMethodGrantRequest', () => {
 		expect(isDirectMethodGrantRequest(grantRequestBase)).toBe(false);
 	});
 });
-describe('RawD2CMessageGrantRequest', () => {
+describe('D2CMessageGrantRequest', () => {
 	it('correctly infers type', () => {
-		expect(isRawD2CMessageGrantRequest(rawD2CMessageGrantRequest)).toBe(true);
-		expect(isRawD2CMessageGrantRequest(telemetryGrantRequest)).toBe(false);
-		expect(isRawD2CMessageGrantRequest(connectionStateGrantRequest)).toBe(
-			false
-		);
-		expect(isRawD2CMessageGrantRequest(desiredPropertyGrantRequest)).toBe(
-			false
-		);
-		expect(isRawD2CMessageGrantRequest(deviceTwinGrantRequest)).toBe(false);
-		expect(isRawD2CMessageGrantRequest(directMethodGrantRequest)).toBe(false);
-		expect(isRawD2CMessageGrantRequest(grantRequestBase)).toBe(false);
+		expect(isD2CMessageGrantRequest(rawD2CMessageGrantRequest)).toBe(true);
+		expect(isD2CMessageGrantRequest(telemetryGrantRequest)).toBe(false);
+		expect(isD2CMessageGrantRequest(connectionStateGrantRequest)).toBe(false);
+		expect(isD2CMessageGrantRequest(desiredPropertyGrantRequest)).toBe(false);
+		expect(isD2CMessageGrantRequest(deviceTwinGrantRequest)).toBe(false);
+		expect(isD2CMessageGrantRequest(directMethodGrantRequest)).toBe(false);
+		expect(isD2CMessageGrantRequest(grantRequestBase)).toBe(false);
 	});
 });
 describe('GrantRequestBase', () => {
