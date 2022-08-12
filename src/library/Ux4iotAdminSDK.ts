@@ -1,5 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
-import { GrantRequest, LogLevel, parseConnectionString } from './ux4iot-shared';
+import {
+	GrantRequest,
+	LogLevel,
+	parseConnectionString,
+	SubscriptionRequest,
+} from './ux4iot-shared';
 
 type LibConfig = {
 	connectionString: string;
@@ -50,6 +55,18 @@ export default class Ux4iotAdmin {
 
 	public async revokeGrant(grantRequest: GrantRequest): Promise<void> {
 		return await this.axiosInstance.delete('/grants', { data: grantRequest });
+	}
+
+	public async subscribe(
+		subscriptionRequest: SubscriptionRequest
+	): Promise<void> {
+		return await this.axiosInstance.put('/subscribe', subscriptionRequest);
+	}
+
+	public async unsubscribe(
+		subscriptionRequest: SubscriptionRequest
+	): Promise<void> {
+		return await this.axiosInstance.put('/unsubscribe', subscriptionRequest);
 	}
 
 	public async revokeSession(sessionId: string): Promise<void> {
