@@ -1,6 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
+import { DeviceMethodParams } from 'azure-iothub';
 import {
 	GrantRequest,
+	IoTHubResponse,
 	LogLevel,
 	parseConnectionString,
 	SubscriptionRequest,
@@ -49,6 +51,14 @@ export default class Ux4iotAdmin {
 		return response.data;
 	}
 
+	public async revokeSession(sessionId: string): Promise<void> {
+		return await this.axiosInstance.delete(`/sessions/${sessionId}`);
+	}
+
+	public async revokeAllSessions(): Promise<void> {
+		return await this.axiosInstance.delete(`/sessions`);
+	}
+
 	public async grant(grantRequest: GrantRequest): Promise<void> {
 		return await this.axiosInstance.put('/grants', grantRequest);
 	}
@@ -64,21 +74,77 @@ export default class Ux4iotAdmin {
 	public async subscribe(
 		subscriptionRequest: SubscriptionRequest
 	): Promise<void> {
-		return await this.axiosInstance.put('/subscribe', subscriptionRequest);
+		return await this.axiosInstance.put('/subscription', subscriptionRequest);
 	}
 
 	public async unsubscribe(
 		subscriptionRequest: SubscriptionRequest
 	): Promise<void> {
-		return await this.axiosInstance.put('/unsubscribe', subscriptionRequest);
+		return await this.axiosInstance.delete('/subscription', {
+			data: subscriptionRequest,
+		});
 	}
 
-	public async revokeSession(sessionId: string): Promise<void> {
-		return await this.axiosInstance.delete(`/sessions/${sessionId}`);
+	public async invokeDirectMethod(
+		sessionId: string,
+		deviceId: string,
+		options: DeviceMethodParams
+	): Promise<IoTHubResponse | void> {
+		const response = await this.axiosInstance.post(
+			'/directMethod',
+			{ deviceId, methodParams: options },
+			{ headers: { sessionId } }
+		);
+
+		return response.data;
 	}
 
-	public async revokeAll(): Promise<void> {
-		return await this.axiosInstance.delete('/grants');
+	public async getLastTelemetryValues(
+		sessionId: string,
+		deviceId: string,
+		telemetryKey: string
+	): Promise<{ deviceId: string; data: any; timestamp: string }> {
+		const response = await this.axiosInstance.get(
+			`/lastValue/${deviceId}/${telemetryKey}`,
+			{ headers: { sessionId } }
+		);
+		return response.data;
+	}
+
+	public async getLastDeviceTwin(
+		sessionId: string,
+		deviceId: string
+	): Promise<{ deviceId: string; data: any; timestamp: string }> {
+		const response = await this.axiosInstance.get(`/deviceTwin/${deviceId}`, {
+			headers: { sessionId },
+		});
+		return response.data;
+	}
+
+	public async getLastConnectionState(
+		sessionId: string,
+		deviceId: string
+	): Promise<{ deviceId: string; data: any; timestamp: string }> {
+		const response = await this.axiosInstance.get(
+			`/connectionState/${deviceId}`,
+			{ headers: { sessionId } }
+		);
+
+		return response.data;
+	}
+
+	public async patchDesiredProperties(
+		sessionId: string,
+		deviceId: string,
+		desiredPropertyPatch: Record<string, unknown>
+	): Promise<IoTHubResponse | void> {
+		const response = await this.axiosInstance.patch<IoTHubResponse | void>(
+			'/deviceTwinDesiredProperties',
+			{ deviceId, desiredPropertyPatch },
+			{ headers: { sessionId } }
+		);
+
+		return response.data;
 	}
 
 	public async logLevel(level: LogLevel): Promise<void> {
