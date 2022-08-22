@@ -57,6 +57,10 @@ export default class Ux4iotAdmin {
 		return await this.axiosInstance.delete('/grants', { data: grantRequest });
 	}
 
+	public async revokeAllGrants(): Promise<void> {
+		return await this.axiosInstance.delete('/grants');
+	}
+
 	public async subscribe(
 		subscriptionRequest: SubscriptionRequest
 	): Promise<void> {
