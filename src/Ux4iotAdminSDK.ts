@@ -11,7 +11,7 @@ import {
 type LibConfig = {
 	connectionString: string;
 };
-export default class Ux4iotAdmin {
+export default class Ux4iotAdminSDK {
 	host: string;
 	key: string;
 	axiosInstance: AxiosInstance;
@@ -65,10 +65,6 @@ export default class Ux4iotAdmin {
 
 	public async revokeGrant(grantRequest: GrantRequest): Promise<void> {
 		return await this.axiosInstance.delete('/grants', { data: grantRequest });
-	}
-
-	public async revokeAllGrants(): Promise<void> {
-		return await this.axiosInstance.delete('/grants');
 	}
 
 	public async subscribe(

@@ -2,13 +2,13 @@
 	"name": "ux4iot-admin-node",
 	"version": "0.4.2",
 	"description": "The Admin SDK for ux4iot",
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"files": [
-		"lib"
+		"dist"
 	],
 	"scripts": {
-		"build": "rm -rf dist && tsc --project tsconfig-lib.json",
+		"build": "rm -rf dist && tsc --project tsconfig.json",
 		"watch": "tsc --w",
 		"lint:fix": "eslint --ignore-path='./.gitignore' '*/**/*.ts' --quiet --fix",
 		"lint": "eslint --ignore-path='./.gitignore' '*/**/*.ts'",

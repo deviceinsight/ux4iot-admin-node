@@ -1,7 +1,6 @@
 # Common
 node_modules/
-lib/
-testapp/
+dist/
 
 # Logs
 logs
