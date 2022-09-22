@@ -17,15 +17,15 @@ npm install ux4iot-admin-node
 
 ## Usage
 
-```js
-import Ux4iotAdmin from 'ux4iot-admin-node';
+```ts
+import Ux4iotAdminSDK from 'ux4iot-admin-node';
 
-const sdk = new Ux4iotAdmin({ connectionString: 'YOUR_CONNECTION_STRING' });
+const sdk = new Ux4iotAdminSDK({ connectionString: 'YOUR_UX4IOT_CONNECTION_STRING' });
 
 const grantRequest = {
     deviceId: 'mydevice',
     sessionId: 'valid-session-id',
-    grantType: 'subscribeToTelemetry',
+    type: 'telemetry',
     telemetryKey: 'mytelemetry'
 }
 
