@@ -7,6 +7,7 @@ import {
 	parseConnectionString,
 	SubscriptionRequest,
 } from './ux4iot-shared';
+import https from 'https'
 
 type LibConfig = {
 	connectionString: string;
@@ -22,11 +23,13 @@ export default class Ux4iotAdminSDK {
 		);
 		this.host = Endpoint;
 		this.key = SharedAccessKey;
+		const httpsAgent = new https.Agent({ keepAlive: true });
 		this.axiosInstance = axios.create({
 			baseURL: Endpoint,
 			headers: {
 				'Shared-Access-Key': SharedAccessKey,
 			},
+			httpsAgent,
 		});
 	}
 
