@@ -81,6 +81,29 @@ export default class Ux4iotAdminSDK {
 		});
 	}
 
+	public async subscribeAll(
+		sessionId: string,
+		subscriptionRequests: SubscriptionRequest[]
+	): Promise<SubscriptionRequest[]> {
+		const response = await this.axiosInstance.put(
+			'subscriptions',
+			{ subscriptionRequests },
+			{ headers: { sessionId } }
+		);
+		return response.data;
+	}
+
+	public async unsubscribeAll(
+		sessionId: string,
+		subscriptionRequests: SubscriptionRequest[]
+	): Promise<SubscriptionRequest[]> {
+		const response = await this.axiosInstance.delete('subscriptions', {
+			data: subscriptionRequests,
+			headers: { sessionId },
+		});
+		return response.data;
+	}
+
 	public async invokeDirectMethod(
 		sessionId: string,
 		deviceId: string,
