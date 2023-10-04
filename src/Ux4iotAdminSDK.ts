@@ -7,7 +7,7 @@ import {
 	parseConnectionString,
 	SubscriptionRequest,
 } from './ux4iot-shared';
-import https from 'https'
+import https from 'https';
 
 type LibConfig = {
 	connectionString: string;
@@ -35,6 +35,12 @@ export default class Ux4iotAdminSDK {
 
 	public async version(): Promise<string> {
 		const response = await this.axiosInstance.get('/version');
+
+		return response.data;
+	}
+
+	public async status(): Promise<string> {
+		const response = await this.axiosInstance.get('/status');
 
 		return response.data;
 	}
@@ -131,6 +137,10 @@ export default class Ux4iotAdminSDK {
 			{ headers: { sessionId } }
 		);
 		return response.data;
+	}
+
+	public async deleteLastValuesForDevice(deviceId: string): Promise<void> {
+		return await this.axiosInstance.delete(`/lastValues/${deviceId}`);
 	}
 
 	public async getLastDeviceTwin(
