@@ -20,7 +20,7 @@
 		"test": "jest --passWithNoTests"
 	},
 	"dependencies": {
-		"axios": "^0.26.1",
+		"axios": "^1.5.1",
 		"azure-iothub": "^1.16.1"
 	},
 	"devDependencies": {
