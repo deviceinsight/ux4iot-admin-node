@@ -140,7 +140,7 @@ export default class Ux4iotAdminSDK {
 	}
 
 	public async deleteLastValuesForDevice(deviceId: string): Promise<void> {
-		return await this.axiosInstance.delete(`/lastValues/${deviceId}`);
+		return await this.axiosInstance.delete(`/lastValue/${deviceId}`);
 	}
 
 	public async getLastDeviceTwin(
