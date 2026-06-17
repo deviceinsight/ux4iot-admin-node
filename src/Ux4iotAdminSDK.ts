@@ -19,7 +19,7 @@ export default class Ux4iotAdminSDK {
 
 	constructor(config: LibConfig) {
 		const { Endpoint, SharedAccessKey } = parseConnectionString(
-			config.connectionString
+			config.connectionString,
 		);
 		this.host = Endpoint;
 		this.key = SharedAccessKey;
@@ -52,7 +52,7 @@ export default class Ux4iotAdminSDK {
 	}
 
 	public static async getSessionIdStatic(
-		endpoint: string
+		endpoint: string,
 	): Promise<{ sessionId: string }> {
 		const url = new URL('/session', endpoint).href;
 		const response = await axios.post(url);
@@ -77,13 +77,13 @@ export default class Ux4iotAdminSDK {
 	}
 
 	public async subscribe(
-		subscriptionRequest: SubscriptionRequest
+		subscriptionRequest: SubscriptionRequest,
 	): Promise<void> {
 		return await this.axiosInstance.put('/subscription', subscriptionRequest);
 	}
 
 	public async unsubscribe(
-		subscriptionRequest: SubscriptionRequest
+		subscriptionRequest: SubscriptionRequest,
 	): Promise<void> {
 		return await this.axiosInstance.delete('/subscription', {
 			data: subscriptionRequest,
@@ -92,19 +92,19 @@ export default class Ux4iotAdminSDK {
 
 	public async subscribeAll(
 		sessionId: string,
-		subscriptionRequests: SubscriptionRequest[]
+		subscriptionRequests: SubscriptionRequest[],
 	): Promise<SubscriptionRequest[]> {
 		const response = await this.axiosInstance.put(
 			'subscriptions',
 			{ subscriptionRequests },
-			{ headers: { sessionId } }
+			{ headers: { sessionId } },
 		);
 		return response.data;
 	}
 
 	public async unsubscribeAll(
 		sessionId: string,
-		subscriptionRequests: SubscriptionRequest[]
+		subscriptionRequests: SubscriptionRequest[],
 	): Promise<SubscriptionRequest[]> {
 		const response = await this.axiosInstance.delete('subscriptions', {
 			data: subscriptionRequests,
@@ -116,12 +116,12 @@ export default class Ux4iotAdminSDK {
 	public async invokeDirectMethod(
 		sessionId: string,
 		deviceId: string,
-		options: DeviceMethodParams
+		options: DeviceMethodParams,
 	): Promise<IoTHubResponse | void> {
 		const response = await this.axiosInstance.post(
 			'/directMethod',
 			{ deviceId, methodParams: options },
-			{ headers: { sessionId } }
+			{ headers: { sessionId } },
 		);
 
 		return response.data;
@@ -130,11 +130,11 @@ export default class Ux4iotAdminSDK {
 	public async getLastTelemetryValues(
 		sessionId: string,
 		deviceId: string,
-		telemetryKey: string
+		telemetryKey: string,
 	): Promise<{ deviceId: string; data: any; timestamp: string }> {
 		const response = await this.axiosInstance.get(
 			`/lastValue/${deviceId}/${telemetryKey}`,
-			{ headers: { sessionId } }
+			{ headers: { sessionId } },
 		);
 		return response.data;
 	}
@@ -145,7 +145,7 @@ export default class Ux4iotAdminSDK {
 
 	public async getLastDeviceTwin(
 		sessionId: string,
-		deviceId: string
+		deviceId: string,
 	): Promise<{ deviceId: string; data: any; timestamp: string }> {
 		const response = await this.axiosInstance.get(`/deviceTwin/${deviceId}`, {
 			headers: { sessionId },
@@ -155,11 +155,11 @@ export default class Ux4iotAdminSDK {
 
 	public async getLastConnectionState(
 		sessionId: string,
-		deviceId: string
+		deviceId: string,
 	): Promise<{ deviceId: string; data: any; timestamp: string }> {
 		const response = await this.axiosInstance.get(
 			`/connectionState/${deviceId}`,
-			{ headers: { sessionId } }
+			{ headers: { sessionId } },
 		);
 
 		return response.data;
@@ -168,12 +168,12 @@ export default class Ux4iotAdminSDK {
 	public async patchDesiredProperties(
 		sessionId: string,
 		deviceId: string,
-		desiredPropertyPatch: Record<string, unknown>
+		desiredPropertyPatch: Record<string, unknown>,
 	): Promise<IoTHubResponse | void> {
 		const response = await this.axiosInstance.patch<IoTHubResponse | void>(
 			'/deviceTwinDesiredProperties',
 			{ deviceId, desiredPropertyPatch },
-			{ headers: { sessionId } }
+			{ headers: { sessionId } },
 		);
 
 		return response.data;

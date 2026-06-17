@@ -117,7 +117,7 @@ export type ParsedConnectionString = {
 };
 
 export function parseConnectionString(
-	connectionString: string
+	connectionString: string,
 ): ParsedConnectionString {
 	const parsed = connectionString.split(';').reduce((acc, part) => {
 		const i = part.indexOf('=');
@@ -132,7 +132,7 @@ export function parseConnectionString(
 
 	if (!parsed.Endpoint || !parsed.SharedAccessKey) {
 		throw new Error(
-			`Invalid Connection String: make sure "Endpoint=..." and "SharedAccessKey=..." is present in your connection string.`
+			`Invalid Connection String: make sure "Endpoint=..." and "SharedAccessKey=..." is present in your connection string.`,
 		);
 	}
 	return parsed;
@@ -149,7 +149,7 @@ export const isGrantRequest = (request: unknown): request is GrantRequest => {
 };
 
 export const isTelemetryGrantRequest = (
-	request: unknown
+	request: unknown,
 ): request is TelemetryGrantRequest => {
 	return (
 		!!request &&
@@ -159,7 +159,7 @@ export const isTelemetryGrantRequest = (
 	);
 };
 export const isDeviceTwinGrantRequest = (
-	request: unknown
+	request: unknown,
 ): request is DeviceTwinGrantRequest => {
 	return (
 		!!request &&
@@ -168,7 +168,7 @@ export const isDeviceTwinGrantRequest = (
 	);
 };
 export const isConnectionStateGrantRequest = (
-	request: unknown
+	request: unknown,
 ): request is ConnectionStateGrantRequest => {
 	return (
 		!!request &&
@@ -177,7 +177,7 @@ export const isConnectionStateGrantRequest = (
 	);
 };
 export const isDesiredPropertyGrantRequest = (
-	request: unknown
+	request: unknown,
 ): request is DesiredPropertyGrantRequest => {
 	return (
 		!!request &&
@@ -186,7 +186,7 @@ export const isDesiredPropertyGrantRequest = (
 	);
 };
 export const isDirectMethodGrantRequest = (
-	request: unknown
+	request: unknown,
 ): request is DirectMethodGrantRequest => {
 	return (
 		!!request &&
@@ -196,7 +196,7 @@ export const isDirectMethodGrantRequest = (
 	);
 };
 export const isD2CMessageGrantRequest = (
-	request: unknown
+	request: unknown,
 ): request is D2CMessageGrantRequest => {
 	return (
 		!!request &&
