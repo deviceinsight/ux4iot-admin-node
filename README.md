@@ -39,3 +39,29 @@ Check out the [Documentation](https://docs.ux4iot.com/implementing-your-custom-s
 - API documentation on grant requests with ux4iot
 - Why you would need to use this library when using ux4iot
 - How to write a security backend for ux4iot
+
+## Releasing
+
+Releases are published to npm automatically via GitHub Actions when a version tag is pushed.
+
+1. Bump the version in `package.json` (and `package-lock.json`) using npm:
+   ```bash
+   npm version patch   # 4.2.0 → 4.2.1
+   npm version minor   # 4.2.0 → 4.3.0
+   npm version major   # 4.2.0 → 5.0.0
+   ```
+   Use `--no-git-tag-version` if you want to create the commit and tag manually.
+
+2. Commit the version bump:
+   ```bash
+   git add package.json package-lock.json
+   git commit -m "Release 4.2.0"
+   ```
+
+3. Create and push the tag:
+   ```bash
+   git tag 4.2.0
+   git push && git push --tags
+   ```
+
+The CI workflow triggers on any pushed tag, runs `npm ci` and `npm run build`, then publishes to npm using the `NPM_TOKEN` secret.
